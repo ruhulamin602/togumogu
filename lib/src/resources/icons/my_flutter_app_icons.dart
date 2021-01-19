@@ -12,18 +12,6 @@
 ///       - asset: fonts/MyFlutterApp.ttf
 ///
 /// 
-/// * MFG Labs, Copyright (C) 2012 by Daniel Bruce
-///         Author:    MFG Labs
-///         License:   SIL (http://scripts.sil.org/OFL)
-///         Homepage:  http://www.mfglabs.com/
-/// * Font Awesome 5, Copyright (C) 2016 by Dave Gandy
-///         Author:    Dave Gandy
-///         License:   SIL (https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt)
-///         Homepage:  http://fortawesome.github.com/Font-Awesome/
-/// * Entypo, Copyright (C) 2012 by Daniel Bruce
-///         Author:    Daniel Bruce
-///         License:   SIL (http://scripts.sil.org/OFL)
-///         Homepage:  http://www.entypo.com
 ///
 import 'package:flutter/widgets.dart';
 
@@ -33,26 +21,16 @@ class MyFlutterApp {
   static const _kFontFam = 'MyFlutterApp';
   static const String _kFontPkg = null;
 
-  static const IconData chat = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData community = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData cricket_on_select = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData cricket = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData facebook = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData hockey_player = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData home_on_select = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData home = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData moon = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData newspaper_on_select = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData newspaper = IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData next = IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData reddit_1 = IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData planet_earth = IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData trophy_on_select = IconData(0xe80e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData settings = IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData trophy = IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData twitter = IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData web_search_engine = IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData twitter_circled = IconData(0xf057, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData reddit = IconData(0xf1a1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
-  static const IconData facebook_circled = IconData(0xf30d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData bell_onselect = IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData bell = IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart_onselect = IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData heart = IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData home_onselect = IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData home = IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData locator = IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData locator_onseclect = IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu_onselect = IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu = IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData shopping_cart_onselect = IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData shopping_cart = IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }

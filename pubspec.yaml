@@ -32,7 +32,7 @@ dependencies:
   google_fonts:
   intl:
   dio: 
-  flutter_config: ^1.0.8
+  flutter_config:
   freezed_annotation: 
   flutter_bloc: 6.0.0
   json_annotation: 
@@ -67,6 +67,10 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/images/
+    
+    
+
 
     
 
@@ -92,6 +96,10 @@ flutter:
   #       - asset: fonts/TrajanPro.ttf
   #       - asset: fonts/TrajanPro_Bold.ttf
   #         weight: 700
+  fonts:
+    - family:  MyFlutterApp
+      fonts:
+       - asset: assets/fonts/MyFlutterApp.ttf
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages

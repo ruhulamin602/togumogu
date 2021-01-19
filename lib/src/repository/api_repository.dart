@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_config/flutter_config.dart';
+// import 'package:flutter_config/flutter_config.dart';
 import 'package:togumogu/src/models/articles/article_response.dart';
 import 'package:togumogu/src/models/articles/articles.dart';
 import 'package:togumogu/src/models/articles/featured_article_response.dart';
@@ -10,7 +11,7 @@ import 'package:togumogu/src/services/network_exceptions.dart';
 class APIRepository {
   DioClient dioClient;
 
-  String _baseUrl = FlutterConfig.get("API_URL");
+  String _baseUrl =  FlutterConfig.get("API_URL");
 
   APIRepository() {
     var dio = Dio();

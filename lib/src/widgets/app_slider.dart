@@ -8,14 +8,14 @@ import 'package:togumogu/src/models/articles/articles.dart';
 import 'package:togumogu/src/services/network_exceptions.dart';
 import 'package:togumogu/src/widgets/slide_card.dart';
 
-class LatestNewsSliders extends StatefulWidget {
+class AppSlider extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
-    return _LatestNewsSlidersState();
+    return _AppSliderState();
   }
 }
 
-class _LatestNewsSlidersState extends State<LatestNewsSliders> {
+class _AppSliderState extends State<AppSlider> {
   @override
   void initState() {
     context.bloc<ArticleCubit>().loadArticles();
@@ -28,7 +28,18 @@ class _LatestNewsSlidersState extends State<LatestNewsSliders> {
       builder: (BuildContext context, ResultState<List<Articles>> state) {
         return state.when(
           loading: () {
-            return Center(child: CircularProgressIndicator());
+            return Center(
+              child: AspectRatio(
+                aspectRatio: 3.2,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    elevation: 0,
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
+                ),
+              ),
+            );
           },
           idle: () {
             return Container();
@@ -38,11 +49,9 @@ class _LatestNewsSlidersState extends State<LatestNewsSliders> {
               items:
                   data.map((article) => SlideCard(article: article)).toList(),
               options: CarouselOptions(
-                
                 viewportFraction: 1.0,
                 autoPlayInterval: Duration(seconds: 5),
                 autoPlay: true,
-                
                 enlargeCenterPage: false,
                 aspectRatio: 3.2,
               ),
@@ -50,7 +59,21 @@ class _LatestNewsSlidersState extends State<LatestNewsSliders> {
           },
           error: (NetworkExceptions error) {
             return Center(
-                child: Text(NetworkExceptions.getErrorMessage(error)));
+              child: AspectRatio(
+                aspectRatio: 3.2,
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    elevation: 0,
+                    child: Center(
+                      child: Text(
+                        NetworkExceptions.getErrorMessage(error),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+            );
           },
         );
       },

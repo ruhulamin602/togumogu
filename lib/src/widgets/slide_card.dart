@@ -17,15 +17,10 @@ class SlideCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
         shape: BoxShape.rectangle,
         color: Colors.white,
-        boxShadow: [
-          BoxShadow(
-              spreadRadius: 1,
-              blurRadius: 2,
-              color: Colors.grey.withOpacity(.1),
-              offset: Offset(0, 5)),
-        ],
+        
       ),
       child: ClipRRect(
+        
         borderRadius: BorderRadius.circular(10),
         child: Image.network(
           article.image,

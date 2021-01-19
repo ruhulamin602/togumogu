@@ -1,22 +1,21 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:palette_generator/palette_generator.dart';
 import 'package:togumogu/src/models/fruit_model.dart';
 
-Widget card(FruitModel fruitModel, int i, List<PaletteColor> colors, double w,
+Widget productCard(FruitModel fruitModel, int i, Color color, double w,
     double h) {
   return new Container(
-    // margin: new EdgeInsets.only(left: 46.0),
+    margin: new EdgeInsets.all(0),
     decoration: new BoxDecoration(
-      color: Colors.white,
+      color: color,
       shape: BoxShape.rectangle,
       borderRadius: new BorderRadius.circular(10.0),
       boxShadow: [
         BoxShadow(
-          color: Colors.grey.withOpacity(0.4),
+          color: Colors.grey.withOpacity(0.3),
           spreadRadius: 1,
-          blurRadius: 3,
+          blurRadius: 2,
           offset: Offset(0, 3), // changes position of shadow
         ),
       ],
@@ -28,8 +27,9 @@ Widget card(FruitModel fruitModel, int i, List<PaletteColor> colors, double w,
         Stack(
           children: [
             Container(
-              width: w * .42,
-              margin: EdgeInsets.only(top: 5, left: 5, right: 5),
+              
+              width: w * .45,
+              margin: EdgeInsets.all(5),
               decoration: BoxDecoration(
                   shape: BoxShape.rectangle,
                   color: Colors.cyan[100],
@@ -43,7 +43,12 @@ Widget card(FruitModel fruitModel, int i, List<PaletteColor> colors, double w,
               top: 10,
               right: 10,
               child: Container(
-                color: Colors.red,
+                padding: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  shape: BoxShape.rectangle,
+                  color: Colors.red.withOpacity(.9),
+                ),
                 child: Text("-10%"),
               ),
             )

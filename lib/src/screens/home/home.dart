@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:togumogu/src/resources/icons/my_flutter_app_icons.dart';
 import 'package:togumogu/src/widgets/home_screen.dart';
+import 'package:togumogu/src/widgets/menu_list.dart';
+import 'package:togumogu/src/widgets/product_list.dart';
 import 'package:togumogu/src/widgets/sizeconfig.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -13,42 +17,68 @@ class MyHomePage extends StatefulWidget {
 }
 
 bool _isSwitched = true;
+int _selectedInd = 0;
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     double h = SizeConfig.safeBlockVertical;
     double w = SizeConfig.blockSizeVertical;
+    List<Widget> _listTabView = [
+      Container(
+        child: HomeScreen(),
+        height: h * 3.2,
+        padding: EdgeInsets.symmetric(horizontal: 10),
+      ),
+      Center(child: Icon(Icons.directions_transit)),
+      Center(child: Icon(Icons.directions_bike)),
+      Center(child: Icon(Icons.directions_car)),
+      Center(child: Icon(Icons.directions_transit)),
+      Center(child: Icon(Icons.directions_bike)),
+      // Icon(Icons.directions_bike),
+    ];
+
     return DefaultTabController(
       length: 6,
       child: Scaffold(
-        appBar: buildAppBar(context),
-        body: TabBarView(
-          children: [
-            HomeScreen(),
-            Icon(Icons.directions_transit),
-            Icon(Icons.directions_bike),
-            Icon(Icons.directions_car),
-            Icon(Icons.directions_transit),
-            Icon(Icons.directions_bike),
-          ],
+        backgroundColor: Color.fromRGBO(236, 239, 244, 1),
+        body: Container(
+          child: CustomScrollView(slivers: [
+            buildAppBar(context),
+            SliverFillRemaining(
+              hasScrollBody: false,
+              fillOverscroll: false,
+              child: _listTabView[_selectedInd],
+            ),
+          ]),
         ),
       ),
     );
   }
 
-  AppBar buildAppBar(BuildContext context) {
-    return AppBar(
-      elevation: 10,
+  SliverAppBar buildAppBar(BuildContext context) {
+    return SliverAppBar(
+      floating: true,
+      pinned: true,
+      primary: true,
+      elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(bottom: Radius.circular(20)),
       ),
-      title: Image.asset(
-        "assets/images/togumogu.png",
-        isAntiAlias: false,
-        width: MediaQuery.of(context).size.width * .23,
-        fit: BoxFit.fill,
+      title: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Image.asset(
+          "assets/images/togumogu.png",
+          isAntiAlias: false,
+          width: MediaQuery.of(context).size.width * .23,
+          fit: BoxFit.fill,
+        ),
       ),
       centerTitle: false,
       actions: [
@@ -71,12 +101,12 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         Container(
-          margin: EdgeInsets.symmetric(vertical: 3, horizontal: 20),
-          padding: EdgeInsets.symmetric(vertical: 2),
+          margin: EdgeInsets.only(top: 8, bottom: 8, right: 20, left: 10),
+          padding: EdgeInsets.symmetric(vertical: 2, horizontal: 3),
           decoration: BoxDecoration(
               shape: BoxShape.rectangle,
               border: Border.all(width: 1, color: Colors.grey.shade400),
-              borderRadius: BorderRadius.circular(40)),
+              borderRadius: BorderRadius.circular(30)),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.end,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,9 +121,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     TextStyle(color: Colors.amber, fontWeight: FontWeight.bold),
               ),
               Padding(
-                padding: const EdgeInsets.all(0),
+                padding: const EdgeInsets.only(left: 5),
                 child: CircleAvatar(
-                  backgroundColor: Colors.amber,
+                  radius: 15,
+                  backgroundColor: Colors.blue,
                   child: Icon(
                     Icons.person_outline_rounded,
                     color: Colors.black45,
@@ -105,21 +136,46 @@ class _MyHomePageState extends State<MyHomePage> {
         )
       ],
       bottom: TabBar(
-        labelColor: Colors.black,
-        labelPadding: EdgeInsets.symmetric(vertical: 20),
-        indicatorSize: TabBarIndicatorSize.tab,
-        indicatorPadding: EdgeInsets.symmetric(horizontal: 12),
-        unselectedLabelColor: Colors.grey.shade500,
-        tabs: [
-          Icon(Icons.home),
-          Icon(Icons.favorite_outline_sharp),
-          Icon(Icons.location_on_sharp),
-          Icon(Icons.card_travel_sharp),
-          Icon(Icons.notification_important_sharp),
-          Icon(Icons.menu),
-        ],
-      ),
+          labelColor: Colors.black,
+          labelPadding: EdgeInsets.symmetric(vertical: 0),
+          // unselectedLabelColor: Colors.grey.shade500,
+          indicatorColor: Colors.white,
+          indicatorSize: TabBarIndicatorSize.label,
+          onTap: (int) {
+            setState(() {
+              _selectedInd = int;
+            });
+          },
+          tabs: [
+            Tab(
+                child: Icon(_selectedInd == 0
+                    ? MyFlutterApp.home_onselect
+                    : MyFlutterApp.home)),
+            Tab(
+                icon: Icon(_selectedInd == 1
+                    ? MyFlutterApp.heart_onselect
+                    : MyFlutterApp.heart)),
+            Tab(
+                icon: Icon(
+              _selectedInd == 2
+                  ? MyFlutterApp.locator_onseclect
+                  : MyFlutterApp.locator,
+              size: 30,
+            )),
+            Tab(
+                icon: Icon(_selectedInd == 3
+                    ? MyFlutterApp.shopping_cart_onselect
+                    : MyFlutterApp.shopping_cart)),
+            Tab(
+              icon: Icon(_selectedInd == 4
+                  ? MyFlutterApp.bell_onselect
+                  : MyFlutterApp.bell),
+            ),
+            Tab(
+                icon: Icon(_selectedInd == 5
+                    ? MyFlutterApp.menu_onselect
+                    : MyFlutterApp.menu)),
+          ]),
     );
   }
 }
-

@@ -2,12 +2,12 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter_config/flutter_config.dart';
+// import 'package:flutter_config/flutter_config.dart';
 
 const _defaultConnectTimeout = Duration.millisecondsPerMinute;
 const _defaultReceiveTimeout = Duration.millisecondsPerMinute;
 // ignore: non_constant_identifier_names
-String  baseUrl= FlutterConfig.get("API_URL");
+// String baseUrl = FlutterConfig.get("API_URL");
 
 class DioClient {
   final String baseUrl;
