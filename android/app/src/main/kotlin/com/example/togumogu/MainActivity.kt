@@ -1,4 +1,4 @@
-package com.example.togumogu
+package com.togumogu
 
 import io.flutter.embedding.android.FlutterActivity
 

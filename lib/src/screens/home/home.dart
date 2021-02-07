@@ -1,14 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:togumogu/src/resources/icons/my_flutter_app_icons.dart';
+import 'package:togumogu/src/screens/setting_screen.dart';
 import 'package:togumogu/src/widgets/home_screen.dart';
-import 'package:togumogu/src/widgets/menu_list.dart';
-import 'package:togumogu/src/widgets/product_list.dart';
+
 import 'package:togumogu/src/widgets/sizeconfig.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({this.title});
 
   final String title;
 
@@ -29,18 +30,18 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     double h = SizeConfig.safeBlockVertical;
-    double w = SizeConfig.blockSizeVertical;
+    double w = SizeConfig.safeBlockHorizontal;
     List<Widget> _listTabView = [
       Container(
         child: HomeScreen(),
-        height: h * 3.2,
+        // height: h * 3.9,
         padding: EdgeInsets.symmetric(horizontal: 10),
       ),
       Center(child: Icon(Icons.directions_transit)),
       Center(child: Icon(Icons.directions_bike)),
       Center(child: Icon(Icons.directions_car)),
       Center(child: Icon(Icons.directions_transit)),
-      Center(child: Icon(Icons.directions_bike)),
+      Center(child: SettingScreen()),
       // Icon(Icons.directions_bike),
     ];
 
@@ -51,9 +52,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         body: Container(
           child: CustomScrollView(slivers: [
             buildAppBar(context),
-            SliverFillRemaining(
-              hasScrollBody: false,
-              fillOverscroll: false,
+            SliverToBoxAdapter(
+              // hasScrollBody: false,
+              // fillOverscroll: false,
               child: _listTabView[_selectedInd],
             ),
           ]),
@@ -64,6 +65,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   SliverAppBar buildAppBar(BuildContext context) {
     return SliverAppBar(
+      // backwardsCompatibility: false,
+      // systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.white),
+      snap: true,
       floating: true,
       pinned: true,
       primary: true,
@@ -83,8 +87,14 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
       centerTitle: false,
       actions: [
         Switch(
-            inactiveThumbImage: AssetImage('assets/images/en.png'),
-            activeThumbImage: AssetImage("assets/images/bn.png"),
+            activeColor: Color.fromRGBO(115, 115, 214, .8),
+            activeTrackColor: Colors.grey.shade300,
+            inactiveTrackColor: Colors.grey.shade300,
+            inactiveThumbColor: Color.fromRGBO(102, 101, 208, .8),
+            inactiveThumbImage: AssetImage(
+              'assets/images/bn3.png',
+            ),
+            activeThumbImage: AssetImage("assets/images/en3.png"),
             value: _isSwitched,
             onChanged: (value) {
               setState(() {
@@ -158,9 +168,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
             Tab(
                 icon: Icon(
               _selectedInd == 2
-                  ? MyFlutterApp.locator_onseclect
-                  : MyFlutterApp.locator,
-              size: 30,
+                  ? MyFlutterApp.home_1
+                  : MyFlutterApp.home_2,
+              
             )),
             Tab(
                 icon: Icon(_selectedInd == 3

@@ -17,7 +17,7 @@ class Tracker extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.all(0),
         margin: EdgeInsets.symmetric(vertical: h * 0.005),
-        height: h * .13,
+        height: h * .15,
         width: w,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
@@ -30,8 +30,8 @@ class Tracker extends StatelessWidget {
             child: Row(
               children: [
                 Container(
-                  margin: EdgeInsets.all(h * .008),
-                  padding: EdgeInsets.all(h * .004),
+                  margin: EdgeInsets.only(top:h * .02,left: w*.02,bottom:h*.02),
+                 
                   width: w * .24,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
@@ -51,21 +51,22 @@ class Tracker extends StatelessWidget {
                   )),
                 ),
                 Container(
-                  width: w * .65,
+                  width: w * .60,
+                  padding: EdgeInsets.only(left: 5),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
                           padding: EdgeInsets.symmetric(
-                              vertical: 5, horizontal: w * 0.01),
+                              vertical: 0, horizontal: 0),
                           child: Text(
                             "Week 16 Day 13",
                             style: TextStyle(
                                 fontSize: 16, fontWeight: FontWeight.bold),
                           )),
                       Container(
-                        padding: EdgeInsets.symmetric(horizontal: w * 0.01),
+                        padding: EdgeInsets.symmetric(horizontal: 0),
                         child: Text(
                           "At this age your child need more care then ever.",
                           maxLines: 3,

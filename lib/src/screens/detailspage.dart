@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
+// import 'package:flutter_svg/svg.dart';
 
 import '../models/fruit_model.dart';
 
@@ -43,11 +43,7 @@ class _DetailsPageState extends State<DetailsPage> {
                     child: new Stack(
                       children: <Widget>[
                         new IconButton(
-                          icon: SvgPicture.asset(
-                            "assets/bag.svg",
-                            color: Colors.black,
-                            width: 30,
-                          ),
+                          icon: Icon(Icons.shopping_bag),
                           onPressed: null,
                         ),
                         new Positioned(
@@ -214,12 +210,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                           SizedBox(
                                             height: 60,
                                           ),
-                                          SvgPicture.asset(
-                                            "assets/bag.svg",
-                                            height: 30,
-                                            width: 30,
-                                            color: Colors.white,
-                                          ),
+                                          Icon(Icons.shopping_bag_outlined),
                                           SizedBox(
                                             width: 10.0,
                                           ),

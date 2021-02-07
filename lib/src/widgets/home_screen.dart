@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:togumogu/src/widgets/video_list.dart';
 import 'package:video_player/video_player.dart';
 import 'package:palette_generator/palette_generator.dart';
 
@@ -33,15 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _updatePalette();
     super.initState();
 
-    _videoPlayerController = VideoPlayerController.network(
+    controller = VideoPlayerController.network(
       'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
+      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false),
     );
-    _videoPlayerController.addListener(() {
-      if (startedPlaying && !_videoPlayerController.value.isPlaying) {
-        Navigator.pop(context);
-      }
-    });
   }
 
   void createArray() {
@@ -63,18 +59,18 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  VideoPlayerController _videoPlayerController;
+  VideoPlayerController controller;
   bool startedPlaying = false;
 
   @override
   void dispose() {
-    _videoPlayerController.dispose();
+    controller.dispose();
     super.dispose();
   }
 
   Future<bool> started() async {
-    await _videoPlayerController.initialize();
-    await _videoPlayerController.pause();
+    await controller.initialize();
+    await controller.pause();
     startedPlaying = false;
     return true;
   }
@@ -90,15 +86,16 @@ class _HomeScreenState extends State<HomeScreen> {
     // final generatedList = List.generate(
     //     3, (index) => articleCard(fruitsData[index], index, colors, w, h));
 
-    var appMenu = buildSliverToBoxAdapterForMenuList(w, h);
-    // Main Screen...
+    // Main HOME Screen...
     return Container(
-      height: 3.5*h,
-              child: Column(
+      // height: 3.5 * h,
+      child: Column(
         children: [
           sliverToBoxAdapter,
-          appMenu,
-
+          MenuItems(
+            w: w,
+            h: h,
+          ),
           Container(
             decoration: BoxDecoration(
                 shape: BoxShape.rectangle,
@@ -117,43 +114,15 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           buildSliverToBoxAdapterForTitle0(),
           buildSliverToBoxAdapterForProducts(w, h),
-          GestureDetector(
-            onTap: () {
-              if (startedPlaying) {
-                _videoPlayerController.pause();
-                setState(() {
-                  startedPlaying = !startedPlaying;
-                });
-              } else {
-                _videoPlayerController.play();
-              }
-            },
-            child: Material(
-              elevation: 3,
-              borderRadius: BorderRadius.circular(10),
-              child: Center(
-                child: FutureBuilder<bool>(
-                  future: started(),
-                  builder:
-                      (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                    if (snapshot.data == true) {
-                      return AspectRatio(
-                        aspectRatio: _videoPlayerController.value.aspectRatio,
-                        child: VideoPlayer(_videoPlayerController),
-                      );
-                    } else {
-                      return Container(
-                          child: const Text('waiting for video to load'));
-                    }
-                  },
-                ),
-              ),
-            ),
-          ),
+          //
           buildSliverToBoxAdapterForTitle("Featured Articles"),
-          Container(height: h*.64,child: buildSliverFixedExtentListOfArticles(h, w, 3)),
+          Container(
+              height: h * .64,
+              child: buildSliverFixedExtentListOfArticles(h, w, 3)),
           buildSliverToBoxAdapterForTitle("Suggested Places"),
-           Container(height: h*.8,child: buildSliverFixedExtentListOfPlaces(h, w, 3)),
+          Container(
+              height: h * .8,
+              child: buildSliverFixedExtentListOfPlaces(h, w, 3)),
         ],
       ),
     );
@@ -202,4 +171,15 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
+  static const _examplePlaybackRates = [
+    0.25,
+    0.5,
+    1.0,
+    1.5,
+    2.0,
+    3.0,
+    5.0,
+    10.0,
+  ];
 }
