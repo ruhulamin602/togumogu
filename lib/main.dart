@@ -35,7 +35,7 @@ class SimpleBlocObserver extends BlocObserver {
 }
 
 void main() async {
-  Bloc.observer = SimpleBlocObserver();
+  // Bloc.observer = SimpleBlocObserver();
   EquatableConfig.stringify = kDebugMode;
   WidgetsFlutterBinding.ensureInitialized();
 
