@@ -28,7 +28,7 @@ class AppTheme {
           elevation: 0,
           iconTheme: IconThemeData(color: AppColors.primaryColor),
           textTheme: TextTheme(
-            title: AppTextStyles.medium18PrimaryColor,
+            headline6: AppTextStyles.medium18PrimaryColor,
           )),
 //        snackBarTheme:
 //            SnackBarThemeData(backgroundColor: AppColors.primaryColor)

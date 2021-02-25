@@ -40,13 +40,14 @@
 			<string>UIInterfaceOrientationLandscapeRight</string>
 		</array>
 		<key>UIViewControllerBasedStatusBarAppearance</key>
-		<false/>
-		<!-- <key>NSAppTransportSecurity</key> -->
-		<key>NSAllowsArbitraryLoads</key>
-		<true/>
+		<false/>		
 		<key>io.flutter.embedded_views_preview</key>
 		<true/>
-
-	</dict>
-
+		<!-- This must be removed befor release virsion -->
+		<key>NSAppTransportSecurity</key>
+		<dict>
+			<key>NSAllowsArbitraryLoads</key>
+			<true/>
+		</dict>
+	</dict>	
 </plist>

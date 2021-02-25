@@ -16,7 +16,7 @@ class _SettingScreenState extends State<SettingScreen> {
     double h = SizeConfig.safeBlockVertical;
     double w = SizeConfig.safeBlockHorizontal;
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 15),
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [

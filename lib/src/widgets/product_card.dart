@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'package:togumogu/src/models/fruit_model.dart';
+import 'package:togumogu/src/models/products/product.dart';
 
-Widget productCard(FruitModel fruitModel, int i, Color color, double w,
-    double h) {
+Widget productCard(Product product, int i, Color color, double w, double h) {
   return new Container(
     margin: new EdgeInsets.all(0),
+    padding: new EdgeInsets.symmetric(vertical: 10),
     decoration: new BoxDecoration(
       color: color,
       shape: BoxShape.rectangle,
@@ -24,96 +24,123 @@ Widget productCard(FruitModel fruitModel, int i, Color color, double w,
       mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Stack(
-          children: [
-            Container(
-              
-              width: w * .45,
-              margin: EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                  shape: BoxShape.rectangle,
-                  color: Colors.cyan[100],
-                  borderRadius: BorderRadius.circular(10)),
-              child: Hero(
-                tag: fruitModel,
-                child: Image.asset(fruitModel.image),
-              ),
-            ),
-            Positioned(
-              top: 10,
-              right: 10,
-              child: Container(
-                padding: EdgeInsets.all(5),
+        Flexible(
+          flex: 12,
+          child: Stack(
+            children: [
+              Container(
+                // width: w * .40,
+                margin: EdgeInsets.all(5),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  shape: BoxShape.rectangle,
-                  color: Colors.red.withOpacity(.9),
+                    shape: BoxShape.rectangle,
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10)),
+                child: Center(
+                  child: Hero(
+                    tag: product.id,
+                    child: Image.network(
+                      product.image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                child: Text("-10%"),
               ),
-            )
-          ],
+              Positioned(
+                top: 10,
+                right: 10,
+                child: Container(
+                  padding: EdgeInsets.all(2.5),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    shape: BoxShape.rectangle,
+                    color: Colors.red.withOpacity(.9),
+                  ),
+                  child: Text(
+                    "-10%",
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                fruitModel.name,
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
+        Flexible(
+          flex: 10,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Flexible(
+                flex: 10,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    product.name,
+                    maxLines: 2,
+                    softWrap: true,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                "৳ ${fruitModel.price}",
-                style: TextStyle(fontSize: 15, fontWeight: FontWeight.w600),
+              Flexible(
+                flex: 5,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    "৳ ${(product.price.toInt() - product.price.toInt() * .1).toInt()}",
+                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                  ),
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Text(
-                "৳ ${fruitModel.price}",
-                style: TextStyle(
-                    color: Colors.grey,
-                    fontSize: 15,
-                    fontWeight: FontWeight.w600,
-                    decoration: TextDecoration.lineThrough),
+              Flexible(
+                flex: 5,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 10),
+                  child: Text(
+                    "৳ ${product.price}",
+                    style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 13,
+                        fontWeight: FontWeight.w600,
+                        decoration: TextDecoration.lineThrough),
+                  ),
+                ),
               ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: 10),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.star,
-                    size: 10,
+              Flexible(
+                flex: 5,
+                child: Container(
+                  padding: EdgeInsets.symmetric(horizontal: 5),
+                  child: Row(
+                    children: [
+                      Icon(
+                        Icons.star,
+                        size: 10,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 10,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 10,
+                      ),
+                      Icon(
+                        Icons.star,
+                        size: 10,
+                      ),
+                      Icon(
+                        Icons.star_half,
+                        size: 10,
+                      ),
+                    ],
                   ),
-                  Icon(
-                    Icons.star,
-                    size: 10,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 10,
-                  ),
-                  Icon(
-                    Icons.star,
-                    size: 10,
-                  ),
-                  Icon(
-                    Icons.star_half,
-                    size: 10,
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         )
       ],
     ),

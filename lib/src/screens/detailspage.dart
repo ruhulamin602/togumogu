@@ -1,14 +1,15 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:togumogu/src/models/products/product.dart';
 // import 'package:flutter_svg/svg.dart';
 
 import '../models/fruit_model.dart';
 
 class DetailsPage extends StatefulWidget {
-  const DetailsPage({Key key, @required this.fruitModel, @required this.color})
+  const DetailsPage({Key key, @required this.product, @required this.color})
       : super(key: key);
-  final FruitModel fruitModel;
+  final Product product;
   final Color color;
 
   @override
@@ -75,10 +76,11 @@ class _DetailsPageState extends State<DetailsPage> {
               ),
               Container(
                 width: 250,
+                
                 child: Hero(
                   transitionOnUserGestures: true,
-                  tag: widget.fruitModel,
-                  child: Image.asset(widget.fruitModel.image),
+                  tag: widget.product.id,
+                  child: Image.network(widget.product.image,fit: BoxFit.cover,),
                 ),
               ),
               Row(
@@ -99,20 +101,20 @@ class _DetailsPageState extends State<DetailsPage> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "${widget.fruitModel.name} - Medium",
+                                "${widget.product.name} - Medium",
                                 style: TextStyle(
                                     fontSize: 35, fontWeight: FontWeight.bold),
                               ),
-                              Text(
-                                "${widget.fruitModel.count.toString()} pc (500g - 700g)",
-                                style: TextStyle(
-                                    fontSize: 25, color: Colors.green),
-                              ),
+                              // Text(
+                              //   "${widget.product..toString()} pc (500g - 700g)",
+                              //   style: TextStyle(
+                              //       fontSize: 25, color: Colors.green),
+                              // ),
                               SizedBox(
                                 height: 10.0,
                               ),
                               Container(
-                                child: Text("${widget.fruitModel.description}"),
+                                child: Text("${widget.product.quantity}"),
                               ),
                               Row(
                                 mainAxisAlignment:
@@ -156,7 +158,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                     mainAxisAlignment: MainAxisAlignment.end,
                                     children: [
                                       Text(
-                                        "\$ ${widget.fruitModel.price.toString()}",
+                                        "\$ ${widget.product.price.toString()}",
                                         style: TextStyle(
                                             fontSize: 35,
                                             fontWeight: FontWeight.bold),

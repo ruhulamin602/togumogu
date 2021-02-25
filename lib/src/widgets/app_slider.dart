@@ -2,8 +2,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:togumogu/src/bloc/movie/article_cubit.dart';
-import 'package:togumogu/src/bloc/movie/result_state.dart';
+import 'package:togumogu/src/bloc/article/article_cubit.dart';
+import 'package:togumogu/src/bloc/article/result_state.dart';
 import 'package:togumogu/src/models/articles/articles.dart';
 import 'package:togumogu/src/services/network_exceptions.dart';
 import 'package:togumogu/src/widgets/slide_card.dart';
@@ -18,7 +18,7 @@ class AppSlider extends StatefulWidget {
 class _AppSliderState extends State<AppSlider> {
   @override
   void initState() {
-    context.bloc<ArticleCubit>().loadArticles();
+    BlocProvider.of<ArticleCubit>(context).loadArticles();
     super.initState();
   }
 

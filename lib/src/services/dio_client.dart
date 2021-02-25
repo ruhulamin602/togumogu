@@ -9,7 +9,7 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 const _defaultConnectTimeout = Duration.millisecondsPerMinute;
 const _defaultReceiveTimeout = Duration.millisecondsPerMinute;
 // ignore: non_constant_identifier_names
-String baseUrl = env["API_URL"];
+// String baseUrl = env["API_URL"];
 
 class DioClient {
   final String baseUrl;

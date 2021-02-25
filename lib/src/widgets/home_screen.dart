@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:togumogu/src/widgets/video_list.dart';
-import 'package:video_player/video_player.dart';
+// import 'package:togumogu/src/widgets/video_list.dart';
+// import 'package:video_player/video_player.dart';
 import 'package:palette_generator/palette_generator.dart';
 
 import 'package:togumogu/src/models/fruit_model.dart';
@@ -34,10 +34,10 @@ class _HomeScreenState extends State<HomeScreen> {
     _updatePalette();
     super.initState();
 
-    controller = VideoPlayerController.network(
-      'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-      videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false),
-    );
+    // controller = VideoPlayerController.network(
+    //   'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
+    //   videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false),
+    // );
   }
 
   void createArray() {
@@ -59,18 +59,18 @@ class _HomeScreenState extends State<HomeScreen> {
     setState(() {});
   }
 
-  VideoPlayerController controller;
+  // VideoPlayerController controller;
   bool startedPlaying = false;
 
   @override
   void dispose() {
-    controller.dispose();
+    // controller.dispose();
     super.dispose();
   }
 
   Future<bool> started() async {
-    await controller.initialize();
-    await controller.pause();
+    // await controller.initialize();
+    // await controller.pause();
     startedPlaying = false;
     return true;
   }
@@ -81,7 +81,7 @@ class _HomeScreenState extends State<HomeScreen> {
     double h = SizeConfig.safeBlockVertical;
     double w = SizeConfig.safeBlockHorizontal;
 
-    var sliverToBoxAdapter = Tracker(w: w, h: h);
+    var tracker = Tracker(w: w, h: h);
     // final _itemExtent = 150.0;
     // final generatedList = List.generate(
     //     3, (index) => articleCard(fruitsData[index], index, colors, w, h));
@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
       // height: 3.5 * h,
       child: Column(
         children: [
-          sliverToBoxAdapter,
+          tracker,
           MenuItems(
             w: w,
             h: h,
@@ -113,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: AppSlider(),
           ),
           buildSliverToBoxAdapterForTitle0(),
-          buildSliverToBoxAdapterForProducts(w, h),
+          ProductList(h:h, w:w,slug: "togumogu-age-appropriate-children-Book",),
           //
           buildSliverToBoxAdapterForTitle("Featured Articles"),
           Container(
@@ -172,14 +172,14 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  static const _examplePlaybackRates = [
-    0.25,
-    0.5,
-    1.0,
-    1.5,
-    2.0,
-    3.0,
-    5.0,
-    10.0,
-  ];
+  // static const _examplePlaybackRates = [
+  //   0.25,
+  //   0.5,
+  //   1.0,
+  //   1.5,
+  //   2.0,
+  //   3.0,
+  //   5.0,
+  //   10.0,
+  // ];
 }

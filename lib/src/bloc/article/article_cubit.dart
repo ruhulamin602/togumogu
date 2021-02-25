@@ -1,6 +1,6 @@
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:togumogu/src/bloc/movie/result_state.dart';
+import 'package:togumogu/src/bloc/article/result_state.dart';
 import 'package:togumogu/src/models/articles/articles.dart';
 import 'package:togumogu/src/repository/api_repository.dart';
 import 'package:togumogu/src/services/api_result.dart';
