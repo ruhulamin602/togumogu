@@ -1,5 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:togumogu/src/repository/authentication_repository.dart';
+import 'package:togumogu/src/routes/router.gr.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
 import 'package:togumogu/src/widgets/menu_list.dart';
 import 'package:togumogu/src/widgets/sizeconfig.dart';
@@ -178,6 +182,17 @@ class _SettingScreenState extends State<SettingScreen> {
                         Flexible(
                             flex: 3,
                             child: OptionCard(
+                              ontap: () async {
+                                await Provider.of<AuthenticationRepository>(
+                                        context,
+                                        listen: false)
+                                    .logout();
+                                Navigator.pushNamedAndRemoveUntil(
+                                    context,
+                                    Routes.welcomeScreen,
+                                    ModalRoute.withName(Routes.welcomeScreen));
+                                print("logged out");
+                              },
                               color: Colors.redAccent,
                               title: "Logout",
                               widget: Icon(
@@ -205,20 +220,20 @@ class OptionCard extends StatelessWidget {
   final String title;
   final String url;
   final Color color;
+  final Function ontap;
   const OptionCard({
     Key key,
     this.widget,
     this.title,
     this.url,
     this.color,
+    this.ontap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        Navigator.pushNamed(context, url ?? null);
-      },
+      onTap: ontap,
       child: Container(
         padding: EdgeInsets.only(left: 0),
         margin: EdgeInsets.all(3),

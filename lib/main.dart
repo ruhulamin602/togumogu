@@ -7,6 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart' as DotEnv;
 // import 'package:flutter_config/flutter_config.dart';
 import 'package:togumogu/src/app.dart';
+import 'package:togumogu/src/repository/authentication_repository.dart';
 
 class SimpleBlocObserver extends BlocObserver {
   @override
@@ -43,7 +44,7 @@ void main() async {
   await DotEnv.load();
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
-      .then((_) => runApp(
-            MyApp(),
-          ));
+      .then((_) => runApp(MyApp(
+            authenticationRepository: AuthenticationRepository(),
+          )));
 }

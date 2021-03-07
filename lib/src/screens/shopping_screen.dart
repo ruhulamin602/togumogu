@@ -26,7 +26,6 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
   @override
   void initState() {
     BlocProvider.of<CategoyCubit>(context).loadCategories();
-
     super.initState();
   }
 
@@ -45,11 +44,10 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
             return Container();
           },
           data: (List<Category> data) {
-            subCategory = data.first;
-            slug = data.first.slug;
+            // subCategory = data.first;
+            // slug = data.first.slug;
             return Container(
-              height: MediaQuery.of(context).size.height -
-                  MediaQuery.of(context).padding.vertical,
+              height: MediaQuery.of(context).size.height,
               // margin: EdgeInsets.only(top: 20, bottom: 0),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -59,7 +57,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                     width: MediaQuery.of(context).size.width * .24,
                     height: MediaQuery.of(context).size.height * .80,
                     margin: EdgeInsets.symmetric(
-                      vertical: 20,
+                      vertical: 5,
                     ),
                     decoration: BoxDecoration(
                       borderRadius:
@@ -114,7 +112,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                   // body part...
                   Container(
                       margin: EdgeInsets.symmetric(horizontal: 10),
-                      padding: EdgeInsets.symmetric(vertical: 20),
+                      padding: EdgeInsets.symmetric(vertical: 0),
                       width: MediaQuery.of(context).size.width * .70,
                       child: CustomScrollView(
                         slivers: [
@@ -123,11 +121,10 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                                 borderRadius: BorderRadius.vertical(
                                     bottom: Radius.circular(10))),
                             centerTitle: false,
-                            elevation: 2,
-                            automaticallyImplyLeading: false,
                             primary: false,
-                            floating: false,
-                            pinned: true,
+                            floating: true,
+                            automaticallyImplyLeading: false,
+                            // pinned: true,
                             title: Container(
                               child: Container(
                                 width: MediaQuery.of(context).size.width * .52,
@@ -232,7 +229,7 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                                 ResultState<List<Product>> state) {
                               return state.when(
                                 loading: () {
-                                  return SliverFillRemaining(
+                                  return SliverToBoxAdapter(
                                     child: Center(
                                         child: CircularProgressIndicator()),
                                   );
@@ -296,7 +293,11 @@ class _ShoppingScreenState extends State<ShoppingScreen> {
                                 },
                               );
                             },
-                          )
+                          ),
+                          SliverPadding(
+                              padding: EdgeInsets.symmetric(
+                                  vertical:
+                                      MediaQuery.of(context).size.height * .1))
                         ],
                       ))
                 ],

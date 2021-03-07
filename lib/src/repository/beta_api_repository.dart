@@ -47,7 +47,7 @@ class BetaAPIRepository {
       );
 
       List<Product> categories = ProductResponse.fromJson(response).data;
-      // print(response);
+      print(response);
       return ApiResult.success(data: categories);
     } catch (e) {
       return ApiResult.failure(error: NetworkExceptions.getDioException(e));

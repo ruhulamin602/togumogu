@@ -3,9 +3,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:togumogu/src/bloc/authentication/authentication_bloc.dart';
 import 'package:togumogu/src/bloc/form/my_form_bloc.dart';
 import 'package:formz/formz.dart';
+// import 'package:togumogu/src/bloc/login/login_bloc.dart';
+
+import 'package:togumogu/src/repository/authentication_repository.dart';
 import 'package:togumogu/src/routes/router.gr.dart';
+import 'package:togumogu/src/screens/login/login.dart';
 import 'package:togumogu/src/widgets/sizeconfig.dart';
 
 import 'home/home.dart';
@@ -17,7 +25,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
-  final _formKey = GlobalKey<FormState>();
+
   // TextEditingController _emailController;
   // TextEditingController _passwordController;
   // TextEditingController _phoneController;
@@ -63,9 +71,8 @@ class _LoginScreenState extends State<LoginScreen> {
     double h = SizeConfig.safeBlockVertical;
     double w = SizeConfig.safeBlockHorizontal;
     var textStyle = TextStyle(fontSize: 20, color: Colors.white);
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
+    return SingleChildScrollView(
+      child: Container(
         height: MediaQuery.of(context).size.height,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -100,7 +107,7 @@ class _LoginScreenState extends State<LoginScreen> {
             // ),
             Container(
               margin: EdgeInsets.symmetric(vertical: 10, horizontal: 40),
-              child: EmailInput1(
+              child: Username(
                 focusNode: _emailFocusNode,
               ),
             ),
@@ -199,8 +206,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                           color: Colors.grey.shade200,
                           borderRadius: BorderRadius.circular(10)),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                       width: w,
                       height: SizeConfig.safeBlockVertical * .07,
                       child: TextButton(
@@ -217,8 +223,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       decoration: BoxDecoration(
                           color: Colors.blue,
                           borderRadius: BorderRadius.circular(10)),
-                      margin:
-                          EdgeInsets.symmetric(vertical: 10, horizontal: 5),
+                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 5),
                       width: w,
                       height: SizeConfig.safeBlockVertical * .07,
                       child: TextButton(
@@ -243,36 +248,36 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 }
 
-class LoginButton extends StatelessWidget {
-  const LoginButton({
-    Key key,
-    @required this.w,
-  }) : super(key: key);
+// class LoginButton extends StatelessWidget {
+//   const LoginButton({
+//     Key key,
+//     @required this.w,
+//   }) : super(key: key);
 
-  final double w;
+//   final double w;
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-          color: Colors.green, borderRadius: BorderRadius.circular(10)),
-      margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
-      width: w,
-      height: SizeConfig.safeBlockVertical * .07,
-      child: TextButton(
-        onPressed: () {
-          Navigator.pushNamedAndRemoveUntil(
-              context, Routes.myHomePage, (route) => false);
-        },
-        child: Text(
-          "Login",
-          style: TextStyle(
-              fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
-        ),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       decoration: BoxDecoration(
+//           color: Colors.green, borderRadius: BorderRadius.circular(10)),
+//       margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+//       width: w,
+//       height: SizeConfig.safeBlockVertical * .07,
+//       child: TextButton(
+//         onPressed: () {
+//           Navigator.pushNamedAndRemoveUntil(context, Routes.myHomePage,
+//               ModalRoute.withName(Routes.myHomePage));
+//         },
+//         child: Text(
+//           "Login",
+//           style: TextStyle(
+//               fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 // class EmailInput extends StatelessWidget {
 //   const EmailInput({
@@ -321,13 +326,14 @@ class LoginButton extends StatelessWidget {
 //   }
 // }
 
-class EmailInput1 extends StatelessWidget {
-  const EmailInput1({Key key, this.focusNode}) : super(key: key);
+class Username extends StatelessWidget {
+  const Username({Key key, this.focusNode}) : super(key: key);
 
   final FocusNode focusNode;
 
   @override
   Widget build(BuildContext context) {
+    print("Log in page");
     return BlocBuilder<MyFormBloc, MyFormState>(
       builder: (context, state) {
         return TextFormField(
@@ -341,11 +347,11 @@ class EmailInput1 extends StatelessWidget {
             floatingLabelBehavior: FloatingLabelBehavior.always,
             // icon:  Icon(Icons.email),
             labelStyle: Theme.of(context).textTheme.bodyText2,
-            hintText: "Enter Your Email Address Here",
-            labelText: 'Email',
-            helperText: 'A complete, valid email e.g. joe@gmail.com',
+            hintText: "Enter Your Username Here",
+            labelText: 'Username',
+            helperText: 'A complete, valid email or Phone number',
             errorText: state.email.invalid
-                ? 'Please ensure the email entered is valid'
+                ? 'Please ensure the email or pohone number entered is valid'
                 : null,
           ),
           keyboardType: TextInputType.emailAddress,
@@ -381,8 +387,7 @@ class PasswordInput extends StatelessWidget {
             labelStyle: Theme.of(context).textTheme.bodyText1,
 
             hintText: "Enter Your Password Here",
-            helperText:
-                '''Password should be at least 8 characters with at least one letter and number''',
+            helperText: '''Password must not be empty.''',
             helperMaxLines: 2,
             labelText: 'Password',
             errorMaxLines: 2,
@@ -402,36 +407,65 @@ class PasswordInput extends StatelessWidget {
 }
 
 class SubmitButton extends StatelessWidget {
+  // AppRepository appRepository = AppRepository();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<MyFormBloc, MyFormState>(
       buildWhen: (previous, current) => previous.status != current.status,
       builder: (context, state) {
+        print(state.password.value.toString());
         return Container(
-            decoration: BoxDecoration(
-                color: state.status.isValidated
-                    ? Colors.red
-                    : Colors.grey.shade400,
-                borderRadius: BorderRadius.circular(10)),
-            margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
-            width: MediaQuery.of(context).size.width * .8,
-            height: SizeConfig.safeBlockVertical * .07,
-            child: ElevatedButton(
-              onPressed: state.status.isValidated
-                  ? () {
-                      // context.read<MyFormBloc>().add(FormSubmitted());
-                      Navigator.of(context).pushAndRemoveUntil(
-                          MaterialPageRoute(builder:(context)=>MyHomePage()), (route) => false);
-                    }
-                  : null,
-              child: Text(
-                'Login',
-                style: Theme.of(context)
-                    .textTheme
-                    .headline6
-                    .copyWith(color: Colors.white),
-              ),
-            ));
+          decoration: BoxDecoration(
+              color: state.status.isValidated
+                  ? Colors.amber
+                  : Colors.grey.shade400,
+              borderRadius: BorderRadius.circular(10)),
+          margin: EdgeInsets.symmetric(vertical: 5, horizontal: 40),
+          width: MediaQuery.of(context).size.width * .8,
+          height: SizeConfig.safeBlockVertical * .07,
+          child: !state.status.isSubmissionInProgress
+              ? ElevatedButton(
+                  style: Theme.of(context).elevatedButtonTheme.style,
+                  onPressed: state.status.isValidated
+                      ? () async {
+                          context.read<MyFormBloc>().add(FormSubmitted());
+                          try {
+                            await Provider.of<AuthenticationRepository>(context,
+                                    listen: false)
+                                .logIn(
+                                    username: state.email.value,
+                                    password: state.password.value,
+                                    devicename: "devic_name")
+                                .then((val) => val
+                                    ? Navigator.of(context).pushAndRemoveUntil(
+                                        MaterialPageRoute(
+                                            builder: (context) => MyHomePage()),
+                                        ModalRoute.withName(
+                                            Routes.mainHomeScreen))
+                                    : Scaffold.of(context).showBottomSheet(
+                                        (context) => Text("Error"),
+                                      ));
+                          } catch (e) {
+                            
+                            throw e;
+                          }
+                          // bool isAuth = Provider.of<AuthenticationRepository>(
+                          //         context,
+                          //         listen: false)
+                          //     .isAuth;
+                          // print(isAuth);
+                        }
+                      : null,
+                  child: Text(
+                    'Login',
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .copyWith(color: Colors.white),
+                  ),
+                )
+              : Center(child: CircularProgressIndicator()),
+        );
       },
     );
   }

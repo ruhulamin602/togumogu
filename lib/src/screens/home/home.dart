@@ -10,7 +10,6 @@ import 'package:togumogu/src/resources/icons/my_flutter_app_icons.dart';
 import 'package:togumogu/src/screens/setting_screen.dart';
 import 'package:togumogu/src/screens/shopping_screen.dart';
 import 'package:togumogu/src/widgets/home_screen.dart';
-
 import 'package:togumogu/src/widgets/sizeconfig.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -38,10 +37,10 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     double h = SizeConfig.safeBlockVertical;
     double w = SizeConfig.safeBlockHorizontal;
     int _selSecIndex =
-        BlocProvider.of<TabbarBloc>(context).setSecondIndex;
+        BlocProvider.of<TabbarBloc>(context, listen: true).setSecondIndex;
     
     int _selFirstInd =
-        BlocProvider.of<TabbarBloc>(context, listen: true).setFirstIndex;
+        BlocProvider.of<TabbarBloc>(context,listen: true).setFirstIndex;
     List<List<Widget>> _listTabView = [
       [
         Container(
@@ -120,7 +119,7 @@ class MyAppBar extends StatelessWidget {
         return SliverAppBar(
           // backwardsCompatibility: false,
           // systemOverlayStyle: SystemUiOverlayStyle(statusBarColor: Colors.white),
-          snap: false,
+          snap: true,
           floating: true,
           pinned: true,
           primary: true,

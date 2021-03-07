@@ -113,7 +113,11 @@ class _HomeScreenState extends State<HomeScreen> {
             child: AppSlider(),
           ),
           buildSliverToBoxAdapterForTitle0(),
-          ProductList(h:h, w:w,slug: "togumogu-age-appropriate-children-Book",),
+          ProductList(
+            h: h,
+            w: w,
+            slug: "togumogu-Authentic-Baby-Products-brand",
+          ),
           //
           buildSliverToBoxAdapterForTitle("Featured Articles"),
           Container(

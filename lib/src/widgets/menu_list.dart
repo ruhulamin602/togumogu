@@ -123,7 +123,7 @@ buildMenuItem({
   Widget icon,
 }) {
   return Container(
-    height: h * .13,
+    height: h * .14,
     margin: EdgeInsets.symmetric(vertical: h * .008),
     child: Column(
       mainAxisAlignment: MainAxisAlignment.center,

@@ -199,7 +199,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                 height: SizeConfig.safeBlockVertical * .06,
                 child: ElevatedButton(
                     onPressed: () {
-                      Navigator.of(context).pushNamed(Routes.loginScreen);
+                      Navigator.of(context).pushNamed(Routes.loginPage);
                     },
                     child: Text(
                       "Login",
