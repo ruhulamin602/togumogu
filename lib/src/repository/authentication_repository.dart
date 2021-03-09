@@ -97,7 +97,7 @@ class AuthenticationRepository with ChangeNotifier {
       final resp = await dioClient.post(
         "/v1/auth/register",
         data: {
-          "name":name?? username,
+          "name": name ?? username,
           "username": username,
           "password": password,
           "password_confirmation": confirm_password,
@@ -118,7 +118,9 @@ class AuthenticationRepository with ChangeNotifier {
       preferences.setString("token", _token);
       return true;
     } on DioError catch (e) {
-      print(e.response.data);
+      _msj = e.response.data['errors']['username'][0];
+      notifyListeners();
+      print(e.response.data['errors']['username'][0] + "Response error");
       return false;
     }
   }

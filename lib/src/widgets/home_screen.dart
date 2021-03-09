@@ -24,20 +24,14 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final List<String> img = [];
-  List<PaletteColor> colors;
 
   @override
   void initState() {
     super.initState();
-    colors = [];
-    createArray();
-    _updatePalette();
-    super.initState();
 
-    // controller = VideoPlayerController.network(
-    //   'https://flutter.github.io/assets-for-api-docs/assets/videos/bee.mp4',
-    //   videoPlayerOptions: VideoPlayerOptions(mixWithOthers: false),
-    // );
+    createArray();
+
+    super.initState();
   }
 
   void createArray() {
@@ -46,33 +40,13 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
-  void _updatePalette() async {
-    for (String image in img) {
-      final PaletteGenerator generator =
-          await PaletteGenerator.fromImageProvider(AssetImage(image),
-              size: Size(200, 100));
-      colors.add(generator.lightMutedColor != null
-          ? generator.lightMutedColor
-          : PaletteColor(Colors.orange[200], 2));
-    }
-
-    setState(() {});
-  }
-
   // VideoPlayerController controller;
-  bool startedPlaying = false;
+  // bool startedPlaying = false;
 
   @override
   void dispose() {
     // controller.dispose();
     super.dispose();
-  }
-
-  Future<bool> started() async {
-    // await controller.initialize();
-    // await controller.pause();
-    startedPlaying = false;
-    return true;
   }
 
   @override
@@ -112,18 +86,18 @@ class _HomeScreenState extends State<HomeScreen> {
             margin: EdgeInsets.symmetric(horizontal: 5, vertical: 5),
             child: AppSlider(),
           ),
-          buildSliverToBoxAdapterForTitle0(),
+          buildTitleForProducts(),
           ProductList(
             h: h,
             w: w,
             slug: "togumogu-Authentic-Baby-Products-brand",
           ),
           //
-          buildSliverToBoxAdapterForTitle("Featured Articles"),
+          buildTitle("Featured Articles", ()=>null),
           Container(
               height: h * .64,
               child: buildSliverFixedExtentListOfArticles(h, w, 3)),
-          buildSliverToBoxAdapterForTitle("Suggested Places"),
+          buildTitle("Suggested Places", ()=>null),
           Container(
               height: h * .8,
               child: buildSliverFixedExtentListOfPlaces(h, w, 3)),
@@ -132,7 +106,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Container buildSliverToBoxAdapterForTitle0() {
+  Container buildTitleForProducts() {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 5, vertical: 0),
       padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
@@ -154,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Container buildSliverToBoxAdapterForTitle(String title) {
+  Container buildTitle(String title, Function onPressed) {
     return Container(
       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
       padding: EdgeInsets.symmetric(horizontal: 0),
@@ -170,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
               icon: Icon(Icons.arrow_forward),
-              onPressed: () => null),
+              onPressed: onPressed?? null),
         ],
       ),
     );

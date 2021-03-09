@@ -22,22 +22,22 @@ import 'package:togumogu/src/widgets/home_screen.dart';
   AutoRoute(
     page: MyHomePage,
     children: <AutoRoute>[
-      AutoRoute(page: HomeScreen, path: '/'),
-      AutoRoute(page: ShoppingScreen, path: '/shopping'),
+      AutoRoute(page: HomeScreen, path: '/home-screen'),
+      AutoRoute(page: ShoppingScreen, path: '/shopping-screen'),
     ]
   ),
   AutoRoute(page: WelcomeScreen),
   AutoRoute(page: SignUpScreen),
   AutoRoute(page: LoginPage),
   AutoRoute(page: ShoppingScreen),
-  AutoRoute(
-    page: MainHomeScreen,
-    // children: <AutoRoute>[
-    //   // path: '/' is the same as setting initial to true
-    //   AutoRoute(path: '/', page: HomeScreen),
-    //   AutoRoute(path: '/shopping', page: ShoppingScreen),
-    // ],
-  ),
+  // AutoRoute(
+  //   page: MainHomeScreen,
+  //   // children: <AutoRoute>[
+  //   //   // path: '/' is the same as setting initial to true
+  //   //   AutoRoute(path: '/', page: HomeScreen),
+  //   //   AutoRoute(path: '/shopping', page: ShoppingScreen),
+  //   // ],
+  // ),
   AutoRoute(page: SplashScreen, initial: true),
 ])
 class $Router {}

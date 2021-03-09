@@ -1,5 +1,7 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 import 'package:togumogu/src/models/products/product.dart';
 
@@ -55,8 +57,9 @@ Widget productCard(Product product, int i, Color color, double w, double h) {
                     shape: BoxShape.rectangle,
                     color: Colors.red.withOpacity(.9),
                   ),
-                  child: Text(
+                  child: AutoSizeText(
                     "-10%",
+                    minFontSize: 12,
                     style: TextStyle(color: Colors.white),
                   ),
                 ),
@@ -71,27 +74,31 @@ Widget productCard(Product product, int i, Color color, double w, double h) {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Flexible(
-                flex: 10,
+                flex: 16,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
+                  child: AutoSizeText(
                     product.name,
                     maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    minFontSize: 12,
+                    wrapWords: true,
                     softWrap: true,
+                    textAlign: TextAlign.left,
                     style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ),
               Flexible(
-                flex: 5,
+                flex: 6,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
+                  child: AutoSizeText(
                     "৳ ${(product.price.toInt() - product.price.toInt() * .1).toInt()}",
-                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w600),
+                    minFontSize: 14,
+                    style: TextStyle(fontWeight: FontWeight.w600),
                   ),
                 ),
               ),
@@ -99,11 +106,11 @@ Widget productCard(Product product, int i, Color color, double w, double h) {
                 flex: 5,
                 child: Container(
                   padding: EdgeInsets.symmetric(horizontal: 10),
-                  child: Text(
+                  child: AutoSizeText(
                     "৳ ${product.price}",
+                    // minFontSize: 12,
                     style: TextStyle(
                         color: Colors.grey,
-                        fontSize: 13,
                         fontWeight: FontWeight.w600,
                         decoration: TextDecoration.lineThrough),
                   ),
@@ -111,32 +118,28 @@ Widget productCard(Product product, int i, Color color, double w, double h) {
               ),
               Flexible(
                 flex: 5,
-                child: Container(
-                  padding: EdgeInsets.symmetric(horizontal: 5),
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.star,
-                        size: 10,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8),
+                      child: RatingBarIndicator(
+                        rating: 4.25,
+                        itemBuilder: (context, index) => Icon(
+                          Icons.star,
+                          color: Colors.amber,
+                        ),
+                        itemCount: 5,
+                        itemSize: 12.0,
+                        direction: Axis.horizontal,
                       ),
-                      Icon(
-                        Icons.star,
-                        size: 10,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 10,
-                      ),
-                      Icon(
-                        Icons.star,
-                        size: 10,
-                      ),
-                      Icon(
-                        Icons.star_half,
-                        size: 10,
-                      ),
-                    ],
-                  ),
+                    ),
+                    
+                    AutoSizeText(
+                      "4.25",
+                      minFontSize: 12,
+                    ),
+                  ],
                 ),
               ),
             ],

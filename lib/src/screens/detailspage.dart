@@ -27,7 +27,7 @@ class _DetailsPageState extends State<DetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: widget.color,
+      backgroundColor: Color.fromRGBO(239, 241, 245, 1),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.only(top: 22),
@@ -87,10 +87,16 @@ class _DetailsPageState extends State<DetailsPage> {
                 ],
               ),
               Container(
-                padding: EdgeInsets.all(10),
-                width: 250,
-                decoration:
-                    BoxDecoration(borderRadius: BorderRadius.circular(30)),
+                padding: EdgeInsets.all(0),
+                margin: EdgeInsets.symmetric(vertical: 10),
+                height: SizeConfig.safeBlockVertical * .4,
+                width: SizeConfig.safeBlockVertical * .4 * 1.2,
+
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(30),
+                  color: Colors.grey.shade200,
+                ),
+
                 //     CarouselSlider(
                 //   items:
                 //       data.map((article) => SlideCard(article: article)).toList(),
@@ -106,14 +112,19 @@ class _DetailsPageState extends State<DetailsPage> {
                 child: Hero(
                   transitionOnUserGestures: true,
                   tag: widget.product.id,
-                  child: Image.network(
-                    widget.product.image,
-                    fit: BoxFit.cover,
+                  child: Container(
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(10),
+                      child: CachedNetworkImage(
+                        imageUrl: widget.product.image,
+                        fit: BoxFit.fill,
+                      ),
+                    ),
                   ),
                 ),
               ),
               Container(
-                  padding: EdgeInsets.all(2),
+                  padding: EdgeInsets.all(0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                   ),
@@ -122,225 +133,258 @@ class _DetailsPageState extends State<DetailsPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Container(
-                        padding: EdgeInsets.all(0),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                        padding: EdgeInsets.all(2),
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Colors.red,
+                          color: Colors.yellow,
                         ),
-                        child: CachedNetworkImage(
-                          imageUrl: widget.product.image,
-                          fit: BoxFit.contain,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.product.image,
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      )
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(2),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey.shade300,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.product.image,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(2),
+                        margin:
+                            EdgeInsets.symmetric(vertical: 0, horizontal: 5),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: Colors.grey.shade300,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(10),
+                          child: CachedNetworkImage(
+                            imageUrl: widget.product.image,
+                            fit: BoxFit.contain,
+                          ),
+                        ),
+                      ),
                     ],
                   )),
               Container(
                 margin: EdgeInsets.symmetric(horizontal: 8),
                 child: ClipRRect(
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30)),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 0.0, sigmaY: 0.0),
-                    child: Container(
-                      padding: EdgeInsets.symmetric(vertical: 10),
-                      color: Colors.cyan.withOpacity(0.3),
-                      // height: MediaQuery.of(context).size.height * 0.55,
-                      width: MediaQuery.of(context).size.width,
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            AutoSizeText(
-                              "${widget.product.name} - Medium",
-                              textAlign: TextAlign.start,
-                              softWrap: true,
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
-                            ),
-                            // Text(
-                            //   "${widget.product.toString()} pc (500g - 700g)",
-                            //   style: TextStyle(
-                            //       fontSize: 25, color: Colors.green),
-                            // ),
-                            SizedBox(
-                              height: 10.0,
-                            ),
-                            Container(
-                              height: SizeConfig.safeBlockVertical * .03,
-                              child: Row(
-                                children: [
-                                  RatingBarIndicator(
-                                    rating: 4.25,
-                                    itemBuilder: (context, index) => Icon(
-                                      Icons.star,
-                                      color: Colors.amber,
-                                    ),
-                                    itemCount: 5,
-                                    itemSize: 20.0,
-                                    direction: Axis.horizontal,
-                                  ),
-                                  AutoSizeText(
-                                    "4.25",
-                                    minFontSize: 12,
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 10),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.white),
-                                    child: AutoSizeText(
-                                        '${widget.product.quantity} Sold'),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                        vertical: 5, horizontal: 10),
-                                    decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.white),
-                                    child: AutoSizeText(
-                                        '${widget.product.quantity} in Stock'),
-                                  )
-                                ],
-                              ),
-                            ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            //   children: [
-                            //     Row(
-                            //       children: [
-                            //         FlatButton(
-                            //           minWidth: 15,
-                            //           shape: RoundedRectangleBorder(
-                            //               borderRadius:
-                            //                   BorderRadius.circular(20.0),
-                            //               side:
-                            //                   BorderSide(color: Colors.black)),
-                            //           onPressed: () {},
-                            //           child: Icon(Icons.add),
-                            //         ),
-                            //         Padding(
-                            //           padding: const EdgeInsets.only(
-                            //               left: 10, right: 10),
-                            //           child: Text(
-                            //             "$count",
-                            //             style: TextStyle(
-                            //                 fontSize: 35,
-                            //                 fontWeight: FontWeight.bold),
-                            //           ),
-                            //         ),
-                            //         FlatButton(
-                            //           minWidth: 15,
-                            //           shape: RoundedRectangleBorder(
-                            //               borderRadius:
-                            //                   BorderRadius.circular(20.0),
-                            //               side:
-                            //                   BorderSide(color: Colors.black)),
-                            //           onPressed: () {},
-                            //           child: Icon(Icons.remove),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //     Column(
-                            //       mainAxisAlignment: MainAxisAlignment.end,
-                            //       children: [
-                            //         Text(
-                            //           "\$ ${widget.product.price.toString()}",
-                            //           style: TextStyle(
-                            //               fontSize: 35,
-                            //               fontWeight: FontWeight.bold),
-                            //         ),
-                            //         Text(
-                            //           "You save: 20%",
-                            //           style: TextStyle(
-                            //             color: Colors.green,
-                            //             fontWeight: FontWeight.bold,
-                            //           ),
-                            //         )
-                            //       ],
-                            //     )
-                            //   ],
-                            // ),
+                  child: Container(
+                    padding: EdgeInsets.symmetric(vertical: 10),
 
-                            SizedBox(
-                              height: 20.0,
-                            ),
-                            Row(
+                    // height: MediaQuery.of(context).size.height * 0.55,
+                    width: MediaQuery.of(context).size.width,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          AutoSizeText(
+                            "${widget.product.name}",
+                            textAlign: TextAlign.start,
+                            softWrap: true,
+                            style: TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.bold),
+                          ),
+                          // Text(
+                          //   "${widget.product.toString()} pc (500g - 700g)",
+                          //   style: TextStyle(
+                          //       fontSize: 25, color: Colors.green),
+                          // ),
+                          SizedBox(
+                            height: 10.0,
+                          ),
+                          Container(
+                            height: SizeConfig.safeBlockVertical * .03,
+                            child: Row(
                               children: [
-                                AutoSizeText(
-                                  "৳${widget.product.price - widget.product.price * .15}",
-                                  style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                      decoration: TextDecoration.lineThrough),
-                                  minFontSize: 16,
-                                  
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                AutoSizeText(
-                                  "৳${widget.product.price} ",
-                                  minFontSize: 22,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Row(
-                              children: [
-                                AutoSizeText(
-                                  "PRODUCT DETAILS",
-                                  minFontSize: 20,
-                                  
-                                  style: TextStyle(fontWeight: FontWeight.bold,color: Colors.blueAccent),
-                                ),
-                                SizedBox(
-                                  width: 10,
+                                RatingBarIndicator(
+                                  rating: 4.25,
+                                  itemBuilder: (context, index) => Icon(
+                                    Icons.star,
+                                    color: Colors.amber,
+                                  ),
+                                  itemCount: 5,
+                                  itemSize: 20.0,
+                                  direction: Axis.horizontal,
                                 ),
                                 AutoSizeText(
-                                  "INFO",
-                                  minFontSize: 16,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                AutoSizeText(
-                                  "REVIEWS",
-                                  minFontSize: 16,
-                                  style: TextStyle(fontWeight: FontWeight.bold),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 10,
-                            ),
-                            Container(
-                                padding: EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                    color: Colors.white70),
-                                child: AutoSizeText(
-                                  loremIpsum(),
-                                  softWrap: true,
+                                  "4.25",
                                   minFontSize: 12,
-                                ))
-                          ],
-                        ),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white),
+                                  child: AutoSizeText(
+                                      '${widget.product.quantity} Sold'),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  padding: EdgeInsets.symmetric(
+                                      vertical: 5, horizontal: 10),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color: Colors.white),
+                                  child: AutoSizeText('In Stock'),
+                                )
+                              ],
+                            ),
+                          ),
+                          // Row(
+                          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //   children: [
+                          //     Row(
+                          //       children: [
+                          //         FlatButton(
+                          //           minWidth: 15,
+                          //           shape: RoundedRectangleBorder(
+                          //               borderRadius:
+                          //                   BorderRadius.circular(20.0),
+                          //               side:
+                          //                   BorderSide(color: Colors.black)),
+                          //           onPressed: () {},
+                          //           child: Icon(Icons.add),
+                          //         ),
+                          //         Padding(
+                          //           padding: const EdgeInsets.only(
+                          //               left: 10, right: 10),
+                          //           child: Text(
+                          //             "$count",
+                          //             style: TextStyle(
+                          //                 fontSize: 35,
+                          //                 fontWeight: FontWeight.bold),
+                          //           ),
+                          //         ),
+                          //         FlatButton(
+                          //           minWidth: 15,
+                          //           shape: RoundedRectangleBorder(
+                          //               borderRadius:
+                          //                   BorderRadius.circular(20.0),
+                          //               side:
+                          //                   BorderSide(color: Colors.black)),
+                          //           onPressed: () {},
+                          //           child: Icon(Icons.remove),
+                          //         ),
+                          //       ],
+                          //     ),
+                          //     Column(
+                          //       mainAxisAlignment: MainAxisAlignment.end,
+                          //       children: [
+                          //         Text(
+                          //           "\$ ${widget.product.price.toString()}",
+                          //           style: TextStyle(
+                          //               fontSize: 35,
+                          //               fontWeight: FontWeight.bold),
+                          //         ),
+                          //         Text(
+                          //           "You save: 20%",
+                          //           style: TextStyle(
+                          //             color: Colors.green,
+                          //             fontWeight: FontWeight.bold,
+                          //           ),
+                          //         )
+                          //       ],
+                          //     )
+                          //   ],
+                          // ),
+
+                          SizedBox(
+                            height: 20.0,
+                          ),
+                          Row(
+                            children: [
+                              AutoSizeText(
+                                "৳${widget.product.price - widget.product.price * .15}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    decoration: TextDecoration.lineThrough,
+                                    color: Colors.red.withOpacity(.7)),
+                                minFontSize: 16,
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              AutoSizeText(
+                                "৳${widget.product.price} ",
+                                minFontSize: 22,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.amber),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 20,
+                          ),
+                          Row(
+                            children: [
+                              AutoSizeText(
+                                "PRODUCT DETAILS",
+                                minFontSize: 17,
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.blueAccent),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              AutoSizeText(
+                                "INFO",
+                                minFontSize: 14,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                width: 10,
+                              ),
+                              AutoSizeText(
+                                "REVIEWS",
+                                minFontSize: 14,
+                                style: TextStyle(fontWeight: FontWeight.bold),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                              padding: EdgeInsets.symmetric(
+                                  vertical: 20, horizontal: 10),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.white),
+                              child: AutoSizeText(
+                                loremIpsum(),
+                                softWrap: true,
+                                minFontSize: 12,
+                              ))
+                        ],
                       ),
-                      // child: ,
                     ),
+                    // child: ,
                   ),
                 ),
               )
@@ -352,34 +396,50 @@ class _DetailsPageState extends State<DetailsPage> {
         height: 60,
         decoration: BoxDecoration(
             boxShadow: [
-              BoxShadow(color: Colors.grey.shade200, offset: Offset(0, -2))
+              BoxShadow(
+                  color: Colors.grey.shade300,
+                  offset: Offset(0, -2),
+                  blurRadius: 2,
+                  spreadRadius: 0)
             ],
-            color: Colors.white70,
+            color: Colors.white,
             borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.lightGreen, // background
-                  onPrimary: Colors.white, // foreground
-                ),
-                onPressed: () {},
-                child: AutoSizeText(
-                  "Buy Now",
-                  minFontSize: 18,
-                )),
-            ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  primary: Colors.amber, // background
-                  onPrimary: Colors.white, // foreground
-                ),
-                onPressed: () {},
-                child: AutoSizeText(
-                  "Add to Cart",
-                  minFontSize: 18,
-                )),
+            Flexible(
+              flex: 1,
+              child: Container(
+                width: SizeConfig.safeBlockHorizontal * .42,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.lightGreen, // background
+                      onPrimary: Colors.white, // foreground
+                    ),
+                    onPressed: () {},
+                    child: AutoSizeText(
+                      "Buy Now",
+                      minFontSize: 18,
+                    )),
+              ),
+            ),
+            Flexible(
+              flex: 1,
+              child: Container(
+                width: SizeConfig.safeBlockHorizontal * .42,
+                child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      primary: Colors.amber, // background
+                      onPrimary: Colors.white, // foreground
+                    ),
+                    onPressed: () => UnimplementedError("Not implimented yet",),
+                    child: AutoSizeText(
+                      "Add to Cart",
+                      minFontSize: 18,
+                    )),
+              ),
+            ),
           ],
         ),
       ),

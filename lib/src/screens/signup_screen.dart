@@ -212,9 +212,11 @@ class UsernameInput extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("Log in page");
     return BlocBuilder<MySignUpBloc, MySignUpFormState>(
       builder: (context, state) {
+        String _errormsj =
+            context.read<AuthenticationRepository>().getMsj?.toString();
+        print(_errormsj);
         return TextFormField(
           initialValue: state.email.value,
           focusNode: focusNode,
@@ -229,9 +231,7 @@ class UsernameInput extends StatelessWidget {
             hintText: "Enter Your Username Here",
             labelText: 'Username',
             helperText: 'A complete, valid email or Phone number',
-            errorText: state.email.invalid
-                ? 'Please ensure the email or pohone number entered is valid'
-                : null,
+            errorText: _errormsj?.toString() ?? null,
           ),
           keyboardType: TextInputType.emailAddress,
           onChanged: (value) {
@@ -370,8 +370,7 @@ class SignUpButton extends StatelessWidget {
                                     ? Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) => MyHomePage()),
-                                        ModalRoute.withName(
-                                            Routes.mainHomeScreen))
+                                        ModalRoute.withName(Routes.myHomePage))
                                     : Scaffold.of(context).showBottomSheet(
                                         (context) => Text("Error"),
                                       ));

@@ -7,15 +7,17 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:togumogu/src/bloc/appbar/language_toggle.dart';
 import 'package:togumogu/src/bloc/appbar/tabbar_index_change.dart';
 import 'package:togumogu/src/resources/icons/my_flutter_app_icons.dart';
+import 'package:togumogu/src/screens/cart_screen.dart';
 import 'package:togumogu/src/screens/setting_screen.dart';
 import 'package:togumogu/src/screens/shopping_screen.dart';
 import 'package:togumogu/src/widgets/home_screen.dart';
 import 'package:togumogu/src/widgets/sizeconfig.dart';
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({this.title});
+  MyHomePage({this.title, this.index});
 
   final String title;
+  final int index;
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -38,9 +40,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     double w = SizeConfig.safeBlockHorizontal;
     int _selSecIndex =
         BlocProvider.of<TabbarBloc>(context, listen: true).setSecondIndex;
-    
+
     int _selFirstInd =
-        BlocProvider.of<TabbarBloc>(context,listen: true).setFirstIndex;
+        BlocProvider.of<TabbarBloc>(context, listen: true).setFirstIndex;
     List<List<Widget>> _listTabView = [
       [
         Container(
@@ -61,7 +63,11 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
         Center(child: Icon(Icons.directions_bike)),
       ],
       [
-        Center(child: Icon(Icons.directions_car)),
+        Container(
+          child: CartScreen(),
+          // height: h * 3.9,
+          padding: EdgeInsets.symmetric(horizontal: 10),
+        ),
       ],
       [
         Center(child: Icon(Icons.directions_transit)),
@@ -73,7 +79,6 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
           // height: h * 3.9,
           padding: EdgeInsets.symmetric(horizontal: 0),
         ),
-
       ]
       // Icon(Icons.directions_bike),
     ];

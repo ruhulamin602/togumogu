@@ -25,6 +25,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   bool _rememberMe = false;
+  bool _isLoading = false;
 
   // TextEditingController _emailController;
   // TextEditingController _passwordController;
@@ -440,13 +441,11 @@ class SubmitButton extends StatelessWidget {
                                     ? Navigator.of(context).pushAndRemoveUntil(
                                         MaterialPageRoute(
                                             builder: (context) => MyHomePage()),
-                                        ModalRoute.withName(
-                                            Routes.mainHomeScreen))
+                                        ModalRoute.withName(Routes.myHomePage))
                                     : Scaffold.of(context).showBottomSheet(
                                         (context) => Text("Error"),
                                       ));
                           } catch (e) {
-                            
                             throw e;
                           }
                           // bool isAuth = Provider.of<AuthenticationRepository>(

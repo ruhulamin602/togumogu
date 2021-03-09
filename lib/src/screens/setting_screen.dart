@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:togumogu/src/repository/authentication_repository.dart';
 import 'package:togumogu/src/routes/router.gr.dart';
 // import 'package:flutter_svg/flutter_svg.dart';
@@ -16,6 +17,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
+   String _userId= Provider.of<AuthenticationRepository>(context).getUserId;
     SizeConfig().init(context);
     double h = SizeConfig.safeBlockVertical;
     double w = SizeConfig.safeBlockHorizontal;
@@ -55,7 +57,7 @@ class _SettingScreenState extends State<SettingScreen> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Hi ! Md. Ruhul',
+                          'Hi ! Md. Ruhul $_userId',
                           style: TextStyle(
                               fontSize: 18, fontWeight: FontWeight.bold),
                         ),

@@ -10,7 +10,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import '../screens/home/home.dart';
-import '../screens/home_screen_navigator.dart';
 import '../screens/login/login.dart';
 import '../screens/shopping_screen.dart';
 import '../screens/signup_screen.dart';
@@ -24,7 +23,6 @@ class Routes {
   static const String signUpScreen = '/sign-up-screen';
   static const String loginPage = '/login-page';
   static const String shoppingScreen = '/shopping-screen';
-  static const String mainHomeScreen = '/main-home-screen';
   static const String splashScreen = '/';
   static const all = <String>{
     myHomePage,
@@ -32,7 +30,6 @@ class Routes {
     signUpScreen,
     loginPage,
     shoppingScreen,
-    mainHomeScreen,
     splashScreen,
   };
 }
@@ -50,7 +47,6 @@ class Router extends RouterBase {
     RouteDef(Routes.signUpScreen, page: SignUpScreen),
     RouteDef(Routes.loginPage, page: LoginPage),
     RouteDef(Routes.shoppingScreen, page: ShoppingScreen),
-    RouteDef(Routes.mainHomeScreen, page: MainHomeScreen),
     RouteDef(Routes.splashScreen, page: SplashScreen),
   ];
   @override
@@ -89,12 +85,6 @@ class Router extends RouterBase {
         settings: data,
       );
     },
-    MainHomeScreen: (data) {
-      return MaterialPageRoute<dynamic>(
-        builder: (context) => MainHomeScreen(),
-        settings: data,
-      );
-    },
     SplashScreen: (data) {
       return MaterialPageRoute<dynamic>(
         builder: (context) => SplashScreen(),
@@ -105,8 +95,8 @@ class Router extends RouterBase {
 }
 
 class MyHomePageRoutes {
-  static const String homeScreen = '/';
-  static const String shoppingScreen = '/shopping';
+  static const String homeScreen = '/home-screen';
+  static const String shoppingScreen = '/shopping-screen';
   static const all = <String>{
     homeScreen,
     shoppingScreen,

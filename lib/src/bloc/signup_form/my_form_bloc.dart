@@ -60,10 +60,10 @@ class MySignUpBloc extends Bloc<MySignUpFormEvent, MySignUpFormState> {
     } else if (event is ConfirmPasswordChanged) {
       final confirmPassword = ConfirmPassword.dirty(event.confirmPassword);
       yield state.copyWith(
-        confirmPassword: state.confirmPassword.valid
+        confirmPassword: confirmPassword.valid
             ? confirmPassword
             : ConfirmPassword.pure(event.confirmPassword),
-        status: Formz.validate([state.email, state.password, confirmPassword]),
+        status: confirmPassword.value==state.password.value? FormzStatus.valid:FormzStatus.invalid,
       );
     } else if (event is ConfirmPasswordUnfocused) {
       final confirmPassword =

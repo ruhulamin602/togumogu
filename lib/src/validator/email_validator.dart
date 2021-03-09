@@ -9,9 +9,17 @@ class Email extends FormzInput<String, EmailValidationError> {
   static final _emailRegex = RegExp(
     r'^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$',
   );
-
+  static final _phoneRegex = RegExp(
+    r'^([+][8]{2}|0088)?(01)([3-9])\d{8}$',
+  );
   @override
   EmailValidationError validator(String value) {
-    return _emailRegex.hasMatch(value) ? null : EmailValidationError.invalid;
+    if (_emailRegex.hasMatch(value)) {
+      return null;
+    } else if (_phoneRegex.hasMatch(value)) {
+      return null;
+    } else {
+      return EmailValidationError.invalid;
+    }
   }
 }
