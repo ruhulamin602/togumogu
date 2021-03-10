@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
@@ -8,6 +9,7 @@ import 'package:togumogu/src/bloc/appbar/language_toggle.dart';
 import 'package:togumogu/src/bloc/appbar/tabbar_index_change.dart';
 import 'package:togumogu/src/resources/icons/my_flutter_app_icons.dart';
 import 'package:togumogu/src/screens/cart_screen.dart';
+import 'package:togumogu/src/screens/order_screen.dart';
 import 'package:togumogu/src/screens/setting_screen.dart';
 import 'package:togumogu/src/screens/shopping_screen.dart';
 import 'package:togumogu/src/widgets/home_screen.dart';
@@ -86,17 +88,64 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
     return DefaultTabController(
       length: 6,
       child: Scaffold(
-        backgroundColor: Color.fromRGBO(236, 239, 244, 1),
-        body: Container(
-          child: CustomScrollView(slivers: [
-            MyAppBar(),
-            SliverToBoxAdapter(
-                // hasScrollBody: false,
-                // fillOverscroll: false,
-                child: _listTabView[_selFirstInd][_selSecIndex]),
-          ]),
-        ),
-      ),
+          backgroundColor: Color.fromRGBO(236, 239, 244, 1),
+          body: Container(
+            child: CustomScrollView(slivers: [
+              MyAppBar(),
+              
+              SliverToBoxAdapter(
+                  // hasScrollBody: false,
+                  // fillOverscroll: false,
+                  child: _listTabView[_selFirstInd][_selSecIndex]),
+            ]),
+          ),
+          bottomNavigationBar: _selFirstInd == 3
+              ? Container(
+                  decoration: BoxDecoration(
+                      color: Colors.white,
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.shade200,
+                            offset: Offset(-2, 0),
+                            blurRadius: 3,
+                            spreadRadius: 2)
+                      ],
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(10))),
+                  padding: EdgeInsets.symmetric(vertical: 20),
+                  height: h * .1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Container(
+                                child: AutoSizeText(
+                              "Shipping: 120 Taka ",
+                              minFontSize: 14,
+                              style: Theme.of(context).textTheme.bodyText1,
+                            )),
+                            Container(
+                                child: AutoSizeText(
+                              "Total: 1200 Taka ",
+                              minFontSize: 18,
+                              style: Theme.of(context).textTheme.bodyText1,
+                            ))
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                          onPressed: () => Navigator.of(context)
+                              .push(MaterialPageRoute(
+                                  builder: (context) => OrderScreen())),
+                          child: Text("Checkout"))
+                    ],
+                  ),
+                )
+              : null),
     );
   }
 

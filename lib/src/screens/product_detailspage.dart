@@ -393,7 +393,8 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
       ),
       bottomNavigationBar: Container(
-        height: 60,
+        height: SizeConfig.safeBlockVertical*.09,
+        padding: EdgeInsets.symmetric(horizontal: 20,vertical: 5),
         decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
@@ -407,6 +408,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 topLeft: Radius.circular(10), topRight: Radius.circular(10))),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Flexible(
               flex: 1,

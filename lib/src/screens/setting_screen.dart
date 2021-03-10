@@ -210,7 +210,8 @@ class _SettingScreenState extends State<SettingScreen> {
               ],
             ),
           ),
-          // Logout Button....
+
+          SizedBox(height: 50,)
         ],
       ),
     );

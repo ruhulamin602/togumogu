@@ -15,7 +15,7 @@ import 'package:togumogu/src/services/network_exceptions.dart';
 import 'package:togumogu/src/widgets/app_slider.dart';
 import 'package:togumogu/src/widgets/product_card.dart';
 
-import 'detailspage.dart';
+import 'product_detailspage.dart';
 
 class ShoppingScreen extends StatefulWidget {
   @override

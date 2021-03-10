@@ -6,7 +6,7 @@ import 'package:togumogu/src/bloc/article/product_cubit.dart';
 import 'package:togumogu/src/bloc/article/result_state.dart';
 import 'package:togumogu/src/models/products/p_category.dart';
 import 'package:togumogu/src/models/products/product.dart';
-import 'package:togumogu/src/screens/detailspage.dart';
+import 'package:togumogu/src/screens/product_detailspage.dart';
 import 'package:togumogu/src/services/network_exceptions.dart';
 import 'package:togumogu/src/widgets/app_bar.dart';
 import 'package:togumogu/src/widgets/product_card.dart';

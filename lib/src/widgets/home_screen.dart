@@ -93,11 +93,11 @@ class _HomeScreenState extends State<HomeScreen> {
             slug: "togumogu-Authentic-Baby-Products-brand",
           ),
           //
-          buildTitle("Featured Articles", ()=>null),
+          buildTitle("Featured Articles", () => null),
           Container(
               height: h * .64,
               child: buildSliverFixedExtentListOfArticles(h, w, 3)),
-          buildTitle("Suggested Places", ()=>null),
+          buildTitle("Suggested Places", () => null),
           Container(
               height: h * .8,
               child: buildSliverFixedExtentListOfPlaces(h, w, 3)),
@@ -144,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
           IconButton(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
               icon: Icon(Icons.arrow_forward),
-              onPressed: onPressed?? null),
+              onPressed: onPressed ?? null),
         ],
       ),
     );

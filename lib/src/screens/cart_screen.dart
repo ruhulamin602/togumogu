@@ -4,37 +4,82 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:togumogu/src/widgets/product_list.dart';
+import 'package:togumogu/src/widgets/sizeconfig.dart';
 
 class CartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
+    double h = SizeConfig.safeBlockVertical;
+    double w = SizeConfig.safeBlockHorizontal;
     return Container(
-      
-      height: MediaQuery.of(context).size.height,
-      child: Scaffold(
-        primary: false,
-        backgroundColor: Color.fromRGBO(239, 241, 245, 1),
-        appBar: AppBar(
-          // flexibleSpace: Container(),
-          title: Text("Cart"),
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          primary: false,
-          
-          
-          
+        child: Column(
+          children: [
+            AppBar(
+              primary: false,
+              title: Text("Cart"),
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+            Container(
+              height: 300,
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    cartTile(),
+                    cartTile(),
+                    cartTile(),
+                  ],
+                ),
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Flexible(
+                    flex: 15,
+                    child: Container(
+                      height: 40,
+                      child: TextFormField(
+                        textAlignVertical: TextAlignVertical.center,
+                        decoration: InputDecoration(
+                            contentPadding: EdgeInsets.symmetric(
+                                vertical: 2.5, horizontal: 10),
+                            alignLabelWithHint: false,
+                            focusedBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(10)),
+                            hintText: "Enter your cupon here"),
+                      ),
+                    ),
+                  ),
+                  Flexible(
+                    flex: 4,
+                    child: ElevatedButton(
+                        onPressed: () => print("going to apply"),
+                        child: AutoSizeText("Apply")),
+                  )
+                ],
+              ),
+            ),
+            buildTitle("Suggested Products", () => null),
+            ProductList(
+              h: h,
+              w: w,
+              slug: "togumogu-Authentic-Baby-Products-brand",
+            ),
+          ],
         ),
-        body: Container(
-          child: Column(
-            children: [
-              cartTile(),
-              cartTile(),
-              cartTile(),
-            ],
-          ),
-        ),
-      ),
-    );
+      );
   }
 
   Container cartTile() {
@@ -187,4 +232,26 @@ class CartScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Container buildTitle(String title, Function onPressed) {
+  return Container(
+    margin: EdgeInsets.symmetric(horizontal: 10, vertical: 0),
+    padding: EdgeInsets.symmetric(horizontal: 0),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Text(
+          title,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+        ),
+        Spacer(),
+        IconButton(
+            padding: EdgeInsets.symmetric(vertical: 0, horizontal: 20),
+            icon: Icon(Icons.arrow_forward),
+            onPressed: onPressed ?? null),
+      ],
+    ),
+  );
 }
