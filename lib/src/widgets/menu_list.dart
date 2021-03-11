@@ -19,7 +19,7 @@ class MenuItems extends StatelessWidget {
     return Container(
         padding: EdgeInsets.symmetric(vertical: h * .003, horizontal: 15),
         width: w,
-        margin: EdgeInsets.symmetric(vertical: 0, horizontal: 0),
+        margin: EdgeInsets.symmetric(vertical: 5, horizontal: 5),
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),

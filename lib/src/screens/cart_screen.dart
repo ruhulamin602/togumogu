@@ -14,72 +14,136 @@ class CartScreen extends StatelessWidget {
     double h = SizeConfig.safeBlockVertical;
     double w = SizeConfig.safeBlockHorizontal;
     return Container(
-        child: Column(
-          children: [
-            AppBar(
-              primary: false,
-              title: Text("Cart"),
-              backgroundColor: Colors.transparent,
-              elevation: 0,
-            ),
-            Container(
-              height: 300,
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    cartTile(),
-                    cartTile(),
-                    cartTile(),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      child: Column(
+        children: [
+          AppBar(
+            centerTitle: false,
+            primary: false,
+            title: Text("Cart"),
+            backgroundColor: Colors.transparent,
+            elevation: 0,
+          ),
+          //Cart list
+          Container(
+            height: 300,
+            child: SingleChildScrollView(
+              child: Column(
                 children: [
-                  Flexible(
-                    flex: 15,
-                    child: Container(
-                      height: 40,
-                      child: TextFormField(
-                        textAlignVertical: TextAlignVertical.center,
-                        decoration: InputDecoration(
-                            contentPadding: EdgeInsets.symmetric(
-                                vertical: 2.5, horizontal: 10),
-                            alignLabelWithHint: false,
-                            focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10)),
-                            hintText: "Enter your cupon here"),
-                      ),
-                    ),
-                  ),
-                  Flexible(
-                    flex: 4,
-                    child: ElevatedButton(
-                        onPressed: () => print("going to apply"),
-                        child: AutoSizeText("Apply")),
-                  )
+                  cartTile(),
+                  cartTile(),
+                  cartTile(),
                 ],
               ),
             ),
-            buildTitle("Suggested Products", () => null),
-            ProductList(
-              h: h,
-              w: w,
-              slug: "togumogu-Authentic-Baby-Products-brand",
+          ),
+
+          // cuponInputArea(context),
+          buildTitle("Suggested Products", () => null),
+          ProductList(
+            h: h,
+            w: w,
+            slug: "togumogu-Authentic-Baby-Products-brand",
+          ),
+          // paymentCalculatinArea(context),
+        ],
+      ),
+    );
+  }
+
+  paymentCalculatinArea(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        color: Colors.white,
+      ),
+      child: Column(
+        children: [
+          Padding(
+
+            padding: const EdgeInsets.symmetric(vertical:15, horizontal: 10),
+            child: Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Icon(Icons.money_sharp),
+                ),
+                AutoSizeText(
+                  "Payment",
+                  style: Theme.of(context).textTheme.headline5,
+                )
+              ],
             ),
-          ],
-        ),
-      );
+          ),
+          titleTOMoneyMap(context, Colors.black87, "Subtotal", "TK 3200"),
+          titleTOMoneyMap(context, Colors.black87, "Discount", "TK 200"),
+          titleTOMoneyMap(context, Colors.black87, "Shiping", "TK 1200"),
+          titleTOMoneyMap(context, Colors.amber, "Total", "TK 4200"),
+          SizedBox(height: 20,)
+        ],
+      ),
+    );
+  }
+
+  Container titleTOMoneyMap(
+      BuildContext context, Color color, String title, String money) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 2.5, horizontal: 30),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          AutoSizeText(
+            title,
+            style: Theme.of(context).textTheme.bodyText1.copyWith(color: color),
+          ),
+          AutoSizeText(
+            money,
+            style: Theme.of(context).textTheme.bodyText1.copyWith(color: color),
+          ),
+        ],
+      ),
+    );
+  }
+
+  cuponInputArea(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+            flex: 15,
+            child: Container(
+              height: 40,
+              child: TextFormField(
+                textAlignVertical: TextAlignVertical.center,
+                decoration: InputDecoration(
+                    contentPadding:
+                        EdgeInsets.symmetric(vertical: 2.5, horizontal: 10),
+                    alignLabelWithHint: false,
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    hintText: "Enter your cupon here"),
+              ),
+            ),
+          ),
+          Flexible(
+            flex: 4,
+            child: ElevatedButton(
+                onPressed: () => print("going to apply"),
+                child: AutoSizeText("Apply")),
+          )
+        ],
+      ),
+    );
   }
 
   Container cartTile() {
